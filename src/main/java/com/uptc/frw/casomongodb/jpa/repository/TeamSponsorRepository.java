@@ -1,4 +1,7 @@
 package com.uptc.frw.casomongodb.jpa.repository;
 
-public interface TeamSponsorRepository {
+import com.uptc.frw.casomongodb.jpa.models.TeamSponsor;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TeamSponsorRepository extends JpaRepository<TeamSponsor, Long> {
 }

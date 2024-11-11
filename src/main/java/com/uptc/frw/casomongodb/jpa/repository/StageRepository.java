@@ -1,4 +1,7 @@
 package com.uptc.frw.casomongodb.jpa.repository;
 
-public interface StageRepository {
+import com.uptc.frw.casomongodb.jpa.models.Stage;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface StageRepository extends JpaRepository<Stage, Long> {
 }
