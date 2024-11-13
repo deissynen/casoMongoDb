@@ -28,6 +28,7 @@ public class Team {
     @JsonIgnore
     private List<EditionTeam> editionTeam;
 
+
     public Team() {
     }
 
