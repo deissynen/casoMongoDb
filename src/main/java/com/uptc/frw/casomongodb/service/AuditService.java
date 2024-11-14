@@ -11,11 +11,10 @@ import java.util.Map;
 
 @Service
 public class AuditService {
-
     @Autowired
     private AuditRepository auditRepository;
 
-    public void registrarAuditoria(String table, String operation, Map<String, Object> oldData, Map<String, Object> newData,  String idRelationalTable) {
+    public void registrarAuditoria(String table, String operation, Map<String, Object> oldData, Map<String, Object> newData, String idRelationalTable) {
         Audit audit = new Audit();
         audit.setTable(table);
         audit.setOperation(operation);
@@ -26,5 +25,4 @@ public class AuditService {
 
         auditRepository.save(audit);
     }
-
 }

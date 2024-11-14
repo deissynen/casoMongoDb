@@ -29,7 +29,7 @@ public class AuditAspectTeam {
     private TeamRepository teamRepository;
 
     // Antes de guardar una entidad (insertar o actualizar)
-    @Before("execution(* com.uptc.frw.casomongodb.jpa.repository.*.save*(..))")
+    @Before("execution(* com.uptc.frw.casomongodb.jpa.repository.TeamRepository.save*(..))")
     public void auditarAntesDeSave(JoinPoint joinPoint) {
         Object entidad = joinPoint.getArgs()[0]; // Obtener la entidad que se va a insertar/actualizar
         if (entidad instanceof Audit) {
@@ -53,7 +53,7 @@ public class AuditAspectTeam {
     }
 
     // Después de guardar una entidad (insertar o actualizar)
-    @AfterReturning(value = "execution(* com.uptc.frw.casomongodb.jpa.repository.*.save*(..))", returning = "resultado")
+    @AfterReturning(value = "execution(* com.uptc.frw.casomongodb.jpa.repository.TeamRepository.save*(..))", returning = "resultado")
     public void auditarDespuesDeSave(JoinPoint joinPoint, Object resultado) {
         Object entidadA = joinPoint.getArgs()[0]; // La entidad que se insertó/actualizó
         if (entidadA instanceof Audit) {
