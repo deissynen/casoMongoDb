@@ -92,7 +92,7 @@ public class AuditAspectTeam {
         // Obtener el primer argumento, que en este caso debería ser el ID o la entidad
         Object argumento = joinPoint.getArgs()[0];
 
-        // Suponiendo que el argumento es un ID de tipo Long o String (si es una entidad completa, necesitarás ajustarlo)
+        // Suponiendo que el argumento es un ID de tipo Long o String 
         String idEntidad = null;
         if (argumento instanceof String) {
             idEntidad = (String) argumento; // Si es un ID de tipo String
