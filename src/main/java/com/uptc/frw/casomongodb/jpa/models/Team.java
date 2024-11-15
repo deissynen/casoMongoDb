@@ -13,12 +13,14 @@ public class Team {
     @SequenceGenerator(name = "team_seq", sequenceName = "EQUIPOS_SEQ", allocationSize = 1)
     @Column(name="ID_EQUIPO")
     private long idTeam;
+
     @Column (name="NOMBRE_EQUIPO")
     private String nameTeam;
+
     @Column (name ="FECHA_FUNDACION")
     private Date creationDateTeam;
 
-    /*Mapeo Relación De Uno a Muchos con la Tabla TeamSponsor [Patrocinado Equipo]*/
+    /* Relación con la Tabla TeamSponsor - Equipos Patrocinadores (Uno a Muchos)*/
     @OneToMany (mappedBy = "team", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<TeamSponsor> teamSponsors;

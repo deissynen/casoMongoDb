@@ -1,5 +1,6 @@
 package com.uptc.frw.casomongodb.jpa.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -27,6 +28,7 @@ public class Stage {
 
     /*Mapeo Relación Uno a Muchos con la Tabla Podium [Podio]*/
     @OneToMany (mappedBy = "stage", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Podium> podiums;
 
     /*Mapeo Relación Muchos a uno con la Tabla Edition [Edicion]*/
@@ -100,6 +102,14 @@ public class Stage {
 
     public void setPodiums(List<Podium> podiums) {
         this.podiums = podiums;
+    }
+
+    public Edition getEditionS() {
+        return editionS;
+    }
+
+    public void setEditionS(Edition editionS) {
+        this.editionS = editionS;
     }
 
     @Override

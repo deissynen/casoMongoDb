@@ -24,7 +24,6 @@ public class EditionTeamService {
     @Autowired
     private RunnerService runnerService;
 
-
     public List<EditionTeam> findAllEditionTeams() {
         return editionTeamRepository.findAll();
     }
@@ -32,6 +31,7 @@ public class EditionTeamService {
     public EditionTeam findEditionTeamById(Long id) {
         return editionTeamRepository.findById(id).orElse(null);
     }
+
     public EditionTeam saveEditionTeam(EditionTeam editionTeam) {
         Edition edition = editionService.findEditionById(editionTeam.getIdEdition());
         editionTeam.setEdition(edition);

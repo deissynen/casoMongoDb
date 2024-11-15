@@ -21,19 +21,17 @@ public class EditionTeam {
 
     /*Mapeo Relación De Muchos a uno con la Tabla Edition [Edicion] */
     @ManyToOne
-    @JsonIgnore
     @JoinColumn (name = "ID_EDICION", referencedColumnName = "ID_EDICION")
     private Edition edition;
 
+
     /*Mapeo Relación De Muchos a uno con la Tabla Team [Equipo] */
     @ManyToOne
-    @JsonIgnore
     @JoinColumn (name = "ID_EQUIPO", referencedColumnName = "ID_EQUIPO")
     private Team team;
 
     /*Mapeo Relación De Muchos a uno con la Tabla Tunner [Corredor] */
     @ManyToOne
-    @JsonIgnore
     @JoinColumn (name = "ID_CORREDOR", referencedColumnName = "ID_CORREDOR")
     private Runner runner;
 
@@ -95,6 +93,7 @@ public class EditionTeam {
     public void setRunner(Runner runner) {
         this.runner = runner;
     }
+
 
     @Override
     public String toString() {

@@ -10,10 +10,13 @@ public class TeamSponsor {
     @SequenceGenerator(name = "teamSponsor_seq", sequenceName = "EQUIPOS_PATROCINADORES_SEQ", allocationSize = 1)
     @Column (name = "ID_EQUIPO_PATROCINADOR")
     private long idTeamSponsor;
+
     @Column (name = "ID_EQUIPO", insertable = false, updatable = false)
     private long idTeam;
+
     @Column (name = "ID_PATROCINADOR", insertable = false, updatable = false)
     private long idSponsor;
+
     @Column (name = "ID_EDICION", insertable = false, updatable = false)
     private long idEdition;
 

@@ -1,5 +1,6 @@
 package com.uptc.frw.casomongodb.jpa.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -22,6 +23,7 @@ public class Runner {
 
     /*Mapeo Relación De Uno a Muchos con la Tabla Podium [Podio]*/
     @OneToMany (mappedBy = "runner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Podium> podiums;
 
     public Runner() {
