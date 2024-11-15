@@ -1,0 +1,145 @@
+CREATE USER CASO_ESTUDIO IDENTIFIED BY MONGODB;
+GRANT CONNECT, RESOURCE TO CASO_ESTUDIO;
+CONN CASO_ESTUDIO/MONGODB
+
+
+/*==============================================================*/
+/* Table: PATROCINADORES                                               */
+/*==============================================================*/
+create table PATROCINADORES
+(
+   ID_PATROCINADOR          NUMBER(10)            not null,
+   NIT                      NUMBER(10)            not null,
+   NOMBRE_PATROCINADOR     VARCHAR2(100)         not null,
+   constraint PK_PATROCINADOR primary key (ID_PATROCINADOR)
+);
+
+/*==============================================================*/
+/* Table: EQUIPOS                                               */
+/*==============================================================*/
+create table EQUIPOS 
+(
+   ID_EQUIPO                 NUMBER(10)            not null,
+   NOMBRE_EQUIPO             VARCHAR2(100)            not null,
+   FECHA_FUNDACION           DATE               not null,
+   constraint PK_EQUIPO primary key (ID_EQUIPO)
+);
+
+/*==============================================================*/
+/* Table: EDICIONES                                               */
+/*==============================================================*/
+create table EDICIONES 
+(
+   ID_EDICION                 NUMBER(10)            not null,
+   ANIO                       NUMBER(4)            not null,
+   FECHA_INICIO               DATE               not null,
+   FECHA_FIN                  DATE               not null,
+   constraint PK_EDICION primary key (ID_EDICION)
+);
+
+/*==============================================================*/
+/* Table: EQUIPOS_PATROCINADORES                                               */
+/*==============================================================*/
+create table EQUIPOS_PATROCINADORES 
+(
+   ID_EQUIPO_PATROCINADOR     NUMBER(10)          not null,
+   ID_EQUIPO                 NUMBER(10)           Not null,
+   ID_PATROCINADOR          NUMBER(10)            not null,
+   ID_EDICION                 NUMBER(10)          not null,
+   constraint PK_EQUIPOPATROCINADOR primary key (ID_EQUIPO_PATROCINADOR)
+);
+
+/*==============================================================*/
+/* Table: CORREDORES                                            */
+/*==============================================================*/
+create table CORREDORES 
+(
+   ID_CORREDOR              NUMBER(10)            not null,
+   NOMBRE_CORREDOR           VARCHAR2(100)         not null,
+   PAIS_NACIMIENTO           VARCHAR2(100)         not null,
+   FECHA_NACIMIENTO          DATE                  not null,
+   constraint PK_CORREDORES primary key (ID_CORREDOR)
+);
+
+
+/*==============================================================*/
+/* Table: EDICIONES_EQUIPOS                                               */
+/*==============================================================*/
+create table EDICIONES_EQUIPOS  
+(
+   ID_EDICION_EQUIPO          NUMBER(10)            not null,
+   ID_EDICION                 NUMBER(10)            not null,
+   ID_EQUIPO                  NUMBER(10)            not null,
+   ID_CORREDOR                NUMBER(10)            not null,
+   constraint PK_EDICIONEQUIPO primary key (ID_EDICION_EQUIPO)
+);
+
+/*==============================================================*/
+/* Table: ETAPAS                                               */
+/*==============================================================*/
+create table ETAPAS  
+(
+   ID_ETAPA                   NUMBER(10)            not null,
+   ID_EDICION                 NUMBER(10)            not null,
+   CONSECUTIVO                NUMBER(4)            not null,
+   ORIGEN                     VARCHAR2(100)         not null,
+   DESTINO                    VARCHAR2(100)         not null,
+   LONGITUD                   NUMBER(6,2),
+   TIPO                       VARCHAR2(100),  
+   constraint PK_ETAPA primary key (ID_ETAPA)
+);
+
+/*==============================================================*/
+/* Table: PODIOS                                               */
+/*==============================================================*/
+create table PODIOS  
+(
+   ID_PODIO                   NUMBER(10)            not null,
+   ID_ETAPA                   NUMBER(10)            not null,
+   ID_CORREDOR                NUMBER(10)            not null,
+   LUGAR_PODIO                NUMBER(4)         not null,
+   TIEMPO                    NUMBER(10,2)           not null,
+   constraint PK_PODIO primary key (ID_PODIO)
+);
+
+/*==============================================================*/
+/* CONSTRAINT                                                     */
+/*==============================================================*/
+alter table EQUIPOS_PATROCINADORES 
+   add constraint FK_PATROCINADOR foreign key (ID_PATROCINADOR)
+      references PATROCINADORES (ID_PATROCINADOR);
+alter table EQUIPOS_PATROCINADORES 
+   add constraint FK_EQUIPO foreign key (ID_EQUIPO)
+      references EQUIPOS (ID_EQUIPO);
+alter table EQUIPOS_PATROCINADORES 
+   add constraint FK_EDICION foreign key (ID_EDICION)
+      references EDICIONES (ID_EDICION);
+alter table EDICIONES_EQUIPOS 
+   add constraint FK_EDICION_EQUIPO foreign key (ID_EQUIPO)
+      references EQUIPOS (ID_EQUIPO);
+alter table EDICIONES_EQUIPOS 
+   add constraint FK_EDICION_EDICION foreign key (ID_EDICION)
+      references EDICIONES (ID_EDICION);      
+alter table EDICIONES_EQUIPOS 
+   add constraint FK_EDICION_CORREDOR foreign key (ID_CORREDOR)
+      references CORREDORES (ID_CORREDOR);
+alter table PODIOS 
+   add constraint FK_PODIO_CORREDOR foreign key (ID_CORREDOR)
+      references CORREDORES (ID_CORREDOR);
+alter table PODIOS 
+   add constraint FK_PODIO_ETAPA foreign key (ID_ETAPA)
+      references ETAPAS (ID_ETAPA);
+alter table ETAPAS
+   add constraint FK_ETAPA_EDICION foreign key (ID_EDICION)
+      references EDICIONES (ID_EDICION);
+/*==============================================================*/
+/* SEQUENCES                                                   */
+/*==============================================================*/      
+create sequence CORREDORES_SEQ start with 1 increment by 1 maxvalue 1000000 minvalue 1 nocycle;  
+create sequence EDICIONES_SEQ start with 1 increment by 1 maxvalue 1000000 minvalue 1 nocycle;
+create sequence EDICIONES_EQUIPOS_SEQ start with 1 increment by 1 maxvalue 1000000 minvalue 1 nocycle;
+create sequence EQUIPOS_SEQ start with 1 increment by 1 maxvalue 1000000 minvalue 1 nocycle;
+create sequence EQUIPOS_PATROCINADORES_SEQ start with 1 increment by 1 maxvalue 1000000 minvalue 1 nocycle;
+create sequence ETAPAS_SEQ start with 1 increment by 1 maxvalue 1000000 minvalue 1 nocycle;
+create sequence PATROCINADORES_SEQ start with 1 increment by 1 maxvalue 1000000 minvalue 1 nocycle;
+create sequence PODIOS_SEQ start with 1 increment by 1 maxvalue 1000000 minvalue 1 nocycle;
